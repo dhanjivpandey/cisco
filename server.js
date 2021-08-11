@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/ciscotest',{ useNewUrlParser: true, useUnifiedTopology: true  });
+mongoose.connect(config.databaseUrl,{ useNewUrlParser: true, useUnifiedTopology: true  });
 
 var routes = require('./api/routes/todoListRoutes');
 routes(app);
@@ -44,13 +44,12 @@ let transporter = nodemailer.createTransport({
     
 
 // cron scheduler 
-cron.schedule('00 56 17 * * *', function() {  
+cron.schedule('*/50 * * * * *', function() {  
   // cronTime: '00 56 17 * * * ' => Will execute on every 5:56 PM      //*/5000 * * * * *
 
-  console.log('---------------------');
   console.log('Running Cron Job');
 
-axios.get(config.databaseUrl).then(resp => {
+axios.get('http://localhost:3000/tasks').then(resp => {
    //some data
 var data = resp.data;
 
