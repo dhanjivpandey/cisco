@@ -60,7 +60,7 @@ const csv = json2csv.parse(data);
 //console.log(csv);
 
   let messageOptions = {
-    from: 'Dadmin email <dhanjiv.medivision@gmail.com>', // sender address
+    from: 'Cisco report email <dhanjiv.medivision@gmail.com>', // sender address
     to: config.emailTo,
     subject: 'Scheduled tosend csv attached email',
     text: 'Hi there. This email was automatically sent by cron.',
